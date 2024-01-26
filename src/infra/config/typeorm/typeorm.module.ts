@@ -22,6 +22,7 @@ export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeO
     // ssl: {
     //   rejectUnauthorized: false,
     // },
+    
   } as TypeOrmModuleOptions);
 
 @Module({
