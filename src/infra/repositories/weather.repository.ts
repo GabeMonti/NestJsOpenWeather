@@ -12,12 +12,12 @@ export class DatabaseWeatherRepository implements WeatherRepository {
     private readonly weatherEntityRepository: Repository<Weather>,
   ) {}
 
-  async updateContent(id: number, isDone: boolean): Promise<void> {
+  async updateContent(id: number, weatherDesc: string): Promise<void> {
     await this.weatherEntityRepository.update(
       {
         id: id,
       },
-      { is_done: isDone },
+      { weather_description: weatherDesc },
     );
   }
   async insert(weather: WeatherM): Promise<WeatherM> {
@@ -42,8 +42,18 @@ export class DatabaseWeatherRepository implements WeatherRepository {
     const weather: WeatherM = new WeatherM();
 
     weather.id = weatherEntity.id;
-    weather.content = weatherEntity.content;
-    weather.isDone = weatherEntity.is_done;
+    weather.city = weatherEntity.city;
+    weather.country = weatherEntity.country;
+    weather.lat = weatherEntity.lat;
+    weather.lon = weatherEntity.lon;
+    weather.weather_main = weatherEntity.weather_main;
+    weather.weather_description = weatherEntity.weather_description;
+    weather.weather_temp = weatherEntity.weather_temp;
+    weather.weather_feels_like = weatherEntity.weather_feels_like;
+    weather.weather_temp_min = weatherEntity.weather_temp_min;
+    weather.weather_temp_max = weatherEntity.weather_temp_max;
+    weather.weather_pressure = weatherEntity.weather_pressure;
+    weather.weather_humidity = weatherEntity.weather_humidity;
     weather.createdDate = weatherEntity.created_date;
     weather.updatedDate = weatherEntity.updated_date;
 
@@ -54,8 +64,18 @@ export class DatabaseWeatherRepository implements WeatherRepository {
     const weatherEntity: Weather = new Weather();
 
     weatherEntity.id = weather.id;
-    weatherEntity.content = weather.content;
-    weatherEntity.is_done = weather.isDone;
+    weatherEntity.city = weather.city;
+    weatherEntity.country = weather.country;
+    weatherEntity.lat = weather.lat;
+    weatherEntity.lon = weather.lon;
+    weatherEntity.weather_main = weather.weather_main;
+    weatherEntity.weather_description = weather.weather_description;
+    weatherEntity.weather_temp = weather.weather_temp;
+    weatherEntity.weather_feels_like = weather.weather_feels_like;
+    weatherEntity.weather_temp_min = weather.weather_temp_min;
+    weatherEntity.weather_temp_max = weather.weather_temp_max;
+    weatherEntity.weather_pressure = weather.weather_pressure;
+    weatherEntity.weather_humidity = weather.weather_humidity;
 
     return weatherEntity;
   }

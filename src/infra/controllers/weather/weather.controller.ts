@@ -46,8 +46,8 @@ export class WeatherController {
   @Put('weather')
   @ApiResponseType(WeatherPresenter, true)
   async updateweather(@Body() updateWeatherDto: UpdateWeatherDto) {
-    const { id, isDone } = updateWeatherDto;
-    await this.updateweatherUsecaseProxy.getInstance().execute(id, isDone);
+    const { id, weatherDesc } = updateWeatherDto;
+    await this.updateweatherUsecaseProxy.getInstance().execute(id, weatherDesc);
     return 'updated with success success';
   }
 

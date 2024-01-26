@@ -9,7 +9,7 @@ export class UpdateWeatherDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsBoolean()
-  readonly isDone: boolean;
+  readonly weatherDesc: string;
 }
 
 export class AddWeatherDto {

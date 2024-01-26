@@ -16,8 +16,8 @@ const config: ConnectionOptions = {
   synchronize: false,
   schema: process.env.DATABASE_SCHEMA,
   migrationsRun: true,
-  migrationsTableName: 'migration_todo',
-  migrations: ['database/migrations/**/*{.ts,.js}'],
+  migrationsTableName: 'migrations',
+  migrations: [__dirname + './../../migrations/*{.ts,.js}'],
 };
 
 console.log(config);

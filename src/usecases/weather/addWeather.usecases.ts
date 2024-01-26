@@ -7,8 +7,6 @@ export class addWeatherUseCases {
 
   async execute(content: string): Promise<WeatherM> {
     const weather = new WeatherM();
-    weather.content = content;
-    weather.isDone = false;
     const result = await this.weatherRepository.insert(weather);
     this.logger.log('addWeatherUseCases execute', 'New weather data have been inserted');
     return result;
