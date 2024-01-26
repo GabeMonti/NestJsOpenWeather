@@ -61,8 +61,8 @@ export class WeatherController {
   @Post('weather')
   @ApiResponseType(WeatherPresenter, true)
   async addweather(@Body() addWeatherDto: AddWeatherDto) {
-    const { content } = addWeatherDto;
-    const weatherCreated = await this.addweatherUsecaseProxy.getInstance().execute(content);
+    const { id } = addWeatherDto;
+    const weatherCreated = await this.addweatherUsecaseProxy.getInstance().execute(id);
     return new WeatherPresenter(weatherCreated);
   }
 }

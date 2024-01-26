@@ -16,5 +16,5 @@ export class AddWeatherDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  readonly content: string;
+  readonly id: string;
 }

@@ -29,12 +29,11 @@ export class WeatherPresenter {
   @ApiProperty()
   weather_humidity: number;
   @ApiProperty()
-  createdate: Date;
+  created_date: Date;
   @ApiProperty()
-  updateddate: Date;
+  updated_date: Date;
 
   constructor(weather: WeatherM) {
-    this.id = weather.id;
     this.id = weather.id;
     this.city = weather.city;
     this.country = weather.country;
@@ -48,7 +47,7 @@ export class WeatherPresenter {
     this.weather_temp_max = weather.weather_temp_max;
     this.weather_pressure = weather.weather_pressure;
     this.weather_humidity = weather.weather_humidity;
-    this.createdate = weather.createdDate;
-    this.updateddate = weather.updatedDate;
+    this.created_date = weather.created_date;
+    this.updated_date = weather.updated_date;
   }
 }

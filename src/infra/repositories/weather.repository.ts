@@ -54,8 +54,8 @@ export class DatabaseWeatherRepository implements WeatherRepository {
     weather.weather_temp_max = weatherEntity.weather_temp_max;
     weather.weather_pressure = weatherEntity.weather_pressure;
     weather.weather_humidity = weatherEntity.weather_humidity;
-    weather.createdDate = weatherEntity.created_date;
-    weather.updatedDate = weatherEntity.updated_date;
+    weather.created_date = weatherEntity.created_date;
+    weather.updated_date = weatherEntity.updated_date;
 
     return weather;
   }
@@ -63,7 +63,6 @@ export class DatabaseWeatherRepository implements WeatherRepository {
   private toWeatherEntity(weather: WeatherM): Weather {
     const weatherEntity: Weather = new Weather();
 
-    weatherEntity.id = weather.id;
     weatherEntity.city = weather.city;
     weatherEntity.country = weather.country;
     weatherEntity.lat = weather.lat;

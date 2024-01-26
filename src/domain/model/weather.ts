@@ -1,5 +1,5 @@
 export class WeatherM {
-  id: number;
+  id: number
   city: string;
   country: string;
   lat: number;
@@ -12,6 +12,6 @@ export class WeatherM {
   weather_temp_max: number;
   weather_pressure: number;
   weather_humidity: number;
-  createdDate: Date;
-  updatedDate: Date;
+  created_date: Date;
+  updated_date: Date;
 }

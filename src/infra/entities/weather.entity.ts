@@ -41,9 +41,9 @@ export class Weather {
   @Column({ type: 'integer', nullable: true })
   weather_humidity: number;
 
-  @CreateDateColumn({ name: 'createdate' })
+  @CreateDateColumn({ name: 'created_date' })
   created_date: Date;
 
-  @UpdateDateColumn({ name: 'updateddate' })
+  @UpdateDateColumn({ name: 'updated_date' })
   updated_date: Date;
 }
