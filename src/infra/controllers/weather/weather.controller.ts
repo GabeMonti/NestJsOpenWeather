@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
@@ -10,6 +10,7 @@ import { updateWeatherUseCases } from '../../../usecases/weather/updateWeather.u
 import { AddWeatherDto, UpdateWeatherDto } from './weather.dto';
 import { deleteWeatherUseCases } from '../../../usecases/weather/deleteWeather.usecases';
 import { addWeatherUseCases } from '../../../usecases/weather/addWeather.usecases';
+import { Cron } from '@nestjs/schedule';
 
 @Controller('Weather')
 @ApiTags('weather')
@@ -31,9 +32,9 @@ export class WeatherController {
 
   @Get('weather')
   @ApiResponseType(WeatherPresenter, false)
-  async getweather(@Query('id', ParseIntPipe) id: number) {
-    const weather = await this.getweatherUsecaseProxy.getInstance().execute(id);
-    return new WeatherPresenter(weather);
+  async getweather(@Param('cityName') cityName: string, @Param('startDate') startDate: Date,  @Param('endDate') endDate: Date) {
+    const weather = await this.getweatherUsecaseProxy.getInstance().execute(cityName, startDate, endDate);
+    return weather.map((weather) => new WeatherPresenter(weather));
   }
 
   @Get('weathers')
@@ -59,6 +60,7 @@ export class WeatherController {
   }
 
   @Post('weather')
+  @Cron('*/15 * * * *')
   @ApiResponseType(WeatherPresenter, true)
   async addweather(@Body() addWeatherDto: AddWeatherDto) {
     const { id } = addWeatherDto;

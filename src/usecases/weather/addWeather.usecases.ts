@@ -2,7 +2,6 @@ import { ILogger } from '../../domain/logger/logger.interface';
 import { WeatherM } from '../../domain/model/weather';
 import { WeatherRepository } from '../../domain/repositories/weatherRepository.interface';
 import { IOpenWeatherServicePayload } from '../../domain/adapters/openweather.interface';
-import { Cron } from '@nestjs/schedule';
 import axios from "axios";
 
 
@@ -11,7 +10,6 @@ export class addWeatherUseCases {
   private readonly weatherRepository: WeatherRepository,
 ) {}
 
-  @Cron('*/15 * * * *')
   async execute(id: string): Promise<any> {
     let idb = 1;
     const payload: IOpenWeatherServicePayload = { 

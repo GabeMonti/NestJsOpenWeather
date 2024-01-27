@@ -4,7 +4,7 @@ import { WeatherRepository } from '../../domain/repositories/weatherRepository.i
 export class GetWeatherUseCases {
   constructor(private readonly weatherRepository: WeatherRepository) {}
 
-  async execute(id: number): Promise<WeatherM> {
-    return await this.weatherRepository.findById(id);
+  async execute(cityName: string, startDate: Date, endDate: Date): Promise<WeatherM[]> {
+    return await this.weatherRepository.findByNameAndDate(cityName, startDate, endDate);
   }
 }

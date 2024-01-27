@@ -34,6 +34,13 @@ export class DatabaseWeatherRepository implements WeatherRepository {
     const weatherEntity = await this.weatherEntityRepository.findOneById(id);
     return this.toWeather(weatherEntity!);
   }
+  async findByNameAndDate(cityName: string, startDate: Date, endDate: Date): Promise<any> {
+    const weathersEntity = await this.weatherEntityRepository.createQueryBuilder("weather")
+      .where("weather.city = :name", { cityName: cityName })
+      .andWhere("weather.created_date >= :startDate", { startDate: startDate })
+      .andWhere("weather.created_date <= :endDate", { endDate: endDate });
+      return weathersEntity;
+  }
   async deleteById(id: number): Promise<void> {
     await this.weatherEntityRepository.delete({ id: id });
   }
