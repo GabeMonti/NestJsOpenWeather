@@ -31,7 +31,6 @@ import { DatabaseUserRepository } from '../repositories/user.repository';
 
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 import { EnvironmentConfigService } from '../config/environment-config/environment-config.service';
-import { IOpenWeatherService } from '../../domain/adapters/openweather.interface';
 import { UseCaseProxy } from './usecases-proxy';
 
 @Module({
@@ -121,8 +120,8 @@ export class UsecasesProxyModule {
         {
           inject: [LoggerService, DatabaseWeatherRepository],
           provide: UsecasesProxyModule.POST_WEATHER_USECASES_PROXY,
-          useFactory: (logger: LoggerService, weatherRepository: DatabaseWeatherRepository, service: IOpenWeatherService) =>
-            new UseCaseProxy(new addWeatherUseCases(logger, weatherRepository, service)),
+          useFactory: (logger: LoggerService, weatherRepository: DatabaseWeatherRepository) =>
+            new UseCaseProxy(new addWeatherUseCases(logger, weatherRepository)),
         },
         {
           inject: [LoggerService, DatabaseWeatherRepository],

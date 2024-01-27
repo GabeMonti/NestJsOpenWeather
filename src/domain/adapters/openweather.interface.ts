@@ -4,7 +4,6 @@ export interface IOpenWeatherServicePayload {
   lang: string;
 }
 
-
 export interface IOpenWeatherService {
   getMultiWeather(payload: IOpenWeatherServicePayload): Promise<any[]> ;
 }

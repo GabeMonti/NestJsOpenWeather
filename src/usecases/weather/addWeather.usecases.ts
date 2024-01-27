@@ -1,15 +1,17 @@
 import { ILogger } from '../../domain/logger/logger.interface';
 import { WeatherM } from '../../domain/model/weather';
 import { WeatherRepository } from '../../domain/repositories/weatherRepository.interface';
-import { IOpenWeatherServicePayload, IOpenWeatherService } from '../../domain/adapters/openweather.interface';
+import { IOpenWeatherServicePayload } from '../../domain/adapters/openweather.interface';
+import { Cron } from '@nestjs/schedule';
+import axios from "axios";
 
 
 export class addWeatherUseCases {
   constructor(private readonly logger: ILogger,
   private readonly weatherRepository: WeatherRepository,
-  private readonly IOpenWeatherService: IOpenWeatherService
 ) {}
 
+  @Cron('*/15 * * * *')
   async execute(id: string): Promise<any> {
     let idb = 1;
     const payload: IOpenWeatherServicePayload = { 
@@ -18,10 +20,10 @@ export class addWeatherUseCases {
       lang: 'pt_br',
     };
     const results = new Array;
-    await this.IOpenWeatherService.getMultiWeather(payload)
-      .then((data) => {
-        console.log(data);
-        return data.forEach(async (data) => {
+    axios.get(`${process.env.OPEN_WEATHER_API_URL}/group?id=${payload.id}&units=${payload.units}&lang=${payload.lang}&appid=${process.env.OPEN_WEATHER_API_KEY}`)
+      .then((res: { data: any; }) => {
+        const dataArray = res?.data?.list;
+        return dataArray.forEach(async (data: { name: any; sys: { country: any; }; coord: { lat: any; lon: any; }; weather: { main: any; description: any;}[]; main: { temp: any; feels_like: any; temp_min: any; temp_max: any; pressure: any; humidity: any; }; }) => {
           const weather : WeatherM = {
             id: idb,
             city: data.name,
