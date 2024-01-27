@@ -12,10 +12,12 @@ import { LocalStrategy } from './infra/common/strategies/local.strategy';
 import { JwtStrategy } from './infra/common/strategies/jwt.strategy';
 import { JwtRefreshTokenStrategy } from './infra/common/strategies/jwtRefresh.strategy';
 import { ScheduleModule } from '@nestjs/schedule';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     PassportModule,
+    HttpModule,
     ScheduleModule.forRoot(),
     JwtModule.register({
       secret: process.env.secret,
